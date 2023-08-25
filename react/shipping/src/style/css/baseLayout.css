@@ -1,0 +1,10 @@
+.index-button-group {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.index-button-group button {
+    margin: 5px 0;
+}
