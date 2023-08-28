@@ -9,14 +9,19 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.5.0",
     "classnames": "^2.3.2",
+    "dotenv": "^16.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
     "sass": "^1.66.1",
-    "web-vitals": "^2.1.4"
+    "simple-xml-to-json": "^1.1.7",
+    "web-vitals": "^2.1.4",
+    "xml-js": "^1.6.11",
+    "xml-parser-xo": "^4.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,5 +46,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "https://unipass.customs.go.kr:38010"
 }
