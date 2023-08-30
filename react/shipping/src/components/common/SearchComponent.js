@@ -27,7 +27,7 @@ const SearchComponent = ({ handleSearch }) => {
         <Box className={"SearchComponent"}>
             <Grid container={true} >
                 <Grid xs={9}>
-                    <TextField label={LABEL.search} size={"small"} fullWidth={true} value={value} onChange={handleChange} onKeyDown={handleClick} />
+                    <TextField label={LABEL.search} size={"small"} fullWidth={true} value={value} onChange={handleChange} onKeyDown={handleClick} color={"success"} />
                 </Grid>
                 <Grid xs={3} paddingLeft={1}>
                     <Button variant={"contained"} fullWidth={true} color={"success"} onClick={handleClick} >

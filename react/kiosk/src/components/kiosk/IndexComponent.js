@@ -1,6 +1,4 @@
-import BaseLayout from "../layout/BaseLayout";
 import {Box, Button} from "@mui/material";
-import {Link} from "react-router-dom";
 
 
 const IndexComponent = ({ goListPage, goRegisterPage, goReservationPage }) => {

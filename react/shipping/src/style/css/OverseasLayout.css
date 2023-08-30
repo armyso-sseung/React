@@ -1,0 +1,23 @@
+.OverseasLayout a {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+.IndexComponent > .overseas-search {
+    margin-top: 5em;
+    margin-bottom: 6em;
+}
+
+.IndexComponent .overseas-table-th {
+    height: 3em;
+    width: 16em;
+    background: dimgrey;
+    color: white;
+    font-weight: bold;
+}
+
+.ListComponent .overseas-table-th {
+    background: lightskyblue;
+}

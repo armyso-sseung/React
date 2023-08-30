@@ -5,7 +5,7 @@ import "../style/css/baseLayout.css"
 const BaseLayout = ({ children }) => {
     return (
         <Container maxWidth={"lx"}>
-            <Box className={"BaseLayout"} justifyContent={"center"} bgcolor={"#cfe8fc"} minHeight={"100vh"} padding={10}>
+            <Box className={"BaseLayout"} justifyContent={"center"} minHeight={"100vh"} padding={10}>
                 { children }
             </Box>
         </Container>

@@ -1,46 +1,101 @@
-import {Box} from "@mui/material";
+import {
+    Box,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    Table,
+    TableBody,
+    TableCell, TableContainer, TableHead,
+    TableRow
+} from "@mui/material";
 import SearchComponent from "../common/SearchComponent";
 import Grid from "@mui/material/Unstable_Grid2";
-import {useEffect, useState} from "react";
-import {getKoreaShipping} from "../../apis/koreaShippingApi";
+import {useState} from "react";
+import {getTracking} from "../../apis/koreaShippingApi";
 
 
-const IndexComponent = () => {
-    const [ value, setValue ] = useState()
-    const [ shipping, setShipping ] = useState([])
+const IndexComponent = ({ courierList, fetchGetTracking, tracking, fetchInsertKorea }) => {
+    const [ courier, setCourier ] = useState('')
 
-    useEffect(() => {
-        if (value) {
-            fetchGetKoreaShipping()
-        }
-    }, [value])
+
+    const handleChange = (event) => {
+        setCourier(event.target.value)
+    }
 
     const handleSearch = (value) => {
-        setValue(value)
-    }
-
-    const fetchGetKoreaShipping = async () => {
-        const data = await getKoreaShipping(value)
-        setShipping(data)
-    }
-
-    const handleFindData = ( item, name ) => {
-        const content = item.name === name ? item.children[0]?.content : ''
-        if (content) {
-            return content
+        if (!courier) {
+            alert("택배사를 선택해주시기 바랍니다.")
+            return
         }
+
+        const shipping = {
+            code: courier,
+            invoice: value
+        }
+
+        fetchGetTracking(shipping)
+        fetchInsertKorea({courierCd: courier, invoice: value})
     }
+
+    const findCourierName = (code) => {
+        return courierList.find( ele => ele.Code === code )?.Name
+    }
+
 
     return (
         <Box className={"IndexComponent"}>
-            <Grid container>
-                <Grid xs={3}>
+            <Grid className={"korea-search"} container justifyContent={"center"}>
+                <Grid xs={2} className={"korea-courier"}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">택배사</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={courier}
+                            label="택배사"
+                            size={"small"}
+                            onChange={handleChange}
+                        >
+                            { courierList.map(ele => (
+                                <MenuItem key={ele.Code} value={ele.Code}>{ele.Name}</MenuItem>
+                            )) }
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid xs={4}>
                     <SearchComponent handleSearch={handleSearch} />
                 </Grid>
             </Grid>
-            { shipping.map((item, idx) => (
-                <p key={idx}>{handleFindData(item, "prnm")}</p>
-            )) }
+
+            <Box sx={{width: '40vw', margin: '0 auto'}}>
+                <Box sx={{marginBottom: '5em', fontWeight: 'bold'}}>
+                    <p>운송장 번호 : { tracking.invoiceNo }</p>
+                    <p>택배사 : { findCourierName(courier) }</p>
+                </Box>
+
+                <TableContainer component={Paper}>
+                    <Table aria-label="simple table">
+                        <TableHead className={"korea-table-th"}>
+                            <TableRow>
+                                <TableCell align={"center"}>시간</TableCell>
+                                <TableCell align={"center"}>현재 위치</TableCell>
+                                <TableCell align={"center"}>배송 상태</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            { tracking.trackingDetails?.map( (ele, index) => (
+                                <TableRow key={index}>
+                                    <TableCell align={"center"}>{ ele.timeString }</TableCell>
+                                    <TableCell align={"center"}>{ ele.where }</TableCell>
+                                    <TableCell align={"center"}>{ ele.kind }</TableCell>
+                                </TableRow>
+                            ) ) }
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Box>
         </Box>
     )
 }

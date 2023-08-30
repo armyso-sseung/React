@@ -1,0 +1,27 @@
+.KoreaLayout a {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+.korea-courier {
+    margin-right: 1em;
+}
+
+.IndexComponent > .korea-search {
+    margin-top: 5em;
+    margin-bottom: 6em;
+}
+
+.IndexComponent .korea-table-th {
+    height: 3em;
+    width: 16em;
+    background: darkorange;
+    color: white;
+    font-weight: bold;
+}
+
+.ListComponent .overseas-table-th {
+    background: lightskyblue;
+}
