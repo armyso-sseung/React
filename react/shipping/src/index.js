@@ -7,6 +7,7 @@ import KoreaIndexPage from "./pages/korea/KoreaIndexPage";
 import OverseasIndexPage from "./pages/overseas/OverseasIndexPage";
 import OverSeasListPage from "./pages/overseas/OverSeasListPage";
 import IndexPage from "./pages/IndexPage";
+import KoreaListPage from "./pages/korea/KoreaListPage";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,6 +16,7 @@ root.render(
         <Routes>
             <Route path={"/"} element={<IndexPage />} />
             <Route path={"/korea"} element={<KoreaIndexPage />} />
+            <Route path={"/korea/list"} element={<KoreaListPage />} />
             <Route path={"/overseas"} element={<OverseasIndexPage />} />
             <Route path={"/overseas/list"} element={<OverSeasListPage />} />
         </Routes>

@@ -1,13 +1,12 @@
 import IndexComponent from "../../components/KoreaShipping/IndexComponent";
 import {useEffect, useState} from "react";
-import {getCourierList, getTracking} from "../../apis/koreaShippingApi";
+import {getCourierList, getKoreaList, getTracking, insertKorea} from "../../apis/koreaShippingApi";
 import KoreaLayout from "../../layouts/KoreaLayout";
 
 
 const KoreaIndexPage = () => {
     const [ courierList, setCourierList ] = useState([])
     const [ tracking, setTracking ] = useState({})
-
 
 
     useEffect(() => {
@@ -29,13 +28,18 @@ const KoreaIndexPage = () => {
     }
 
     const fetchInsertKorea = async ( {courierCd, invoice} ) => {
-        const courier = courierList.find(ele => ele.Code === courierCd)
+        const koreaShippingList = await getKoreaList()
+        const shipping = koreaShippingList?.find(ele => ele.courierCd === courierCd)
+        if (shipping) return
 
+        const courier = courierList?.find(ele => ele.Code === courierCd)
         const koreaInfo = {
             courierCd: courier.Code,
             courierNm: courier.Name,
             invoice
         }
+
+        await insertKorea(koreaInfo)
     }
 
 

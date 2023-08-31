@@ -22,6 +22,11 @@
     font-weight: bold;
 }
 
-.ListComponent .overseas-table-th {
-    background: lightskyblue;
+.ListComponent .korea-table-th {
+    background: darkolivegreen;
+}
+
+.ListComponent .korea-table-th th {
+    font-weight: bold;
+    color: white;
 }

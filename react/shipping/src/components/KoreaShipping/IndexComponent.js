@@ -31,12 +31,12 @@ const IndexComponent = ({ courierList, fetchGetTracking, tracking, fetchInsertKo
         }
 
         const shipping = {
-            code: courier,
-            invoice: value
+            courierCd: courier,
+            invoice: value.trim()
         }
 
         fetchGetTracking(shipping)
-        fetchInsertKorea({courierCd: courier, invoice: value})
+        fetchInsertKorea(shipping)
     }
 
     const findCourierName = (code) => {

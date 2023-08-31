@@ -17,12 +17,12 @@ export const getCourierList = async () => {
         .catch(error => console.error(error))
 }
 
-export const getTracking = async ({ code, invoice }) => {
+export const getTracking = async ({ courierCd, invoice }) => {
     return await axios.get(`${SWEETTRACKER_URL}/trackingInfo`,
         {
             params: {
                 t_key: process.env.REACT_APP_SWEETTRACKER_API_KEY,
-                t_code: code,
+                t_code: courierCd,
                 t_invoice: invoice
             }
         })
@@ -32,12 +32,23 @@ export const getTracking = async ({ code, invoice }) => {
 
 
 export const getKoreaList = async () => {
-    const res = await axios.get(`${BASE_URL}`)
-    return res.data
+    return await axios.get(`${BASE_URL}`)
+        .then(r => {
+            Promise.all(r.data.map(async (korea) => {
+                const shipping = await getTracking(korea).trackingDetails?.at(-1)?.kind
+                return {...korea, kind: shipping}
+            }))
+        })
 }
 
 export const insertKorea = async (korea) => {
     await axios.post(`${BASE_URL}`, korea)
+        .then(r => console.log(`API 통신에 성공하였습니다.`))
+        .catch(error => console.error(error))
+}
+
+export const deleteKorea = async (id) => {
+    await axios.delete(`${BASE_URL}/${id}`)
         .then(r => console.log(`API 통신에 성공하였습니다.`))
         .catch(error => console.error(error))
 }
