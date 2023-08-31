@@ -10,6 +10,7 @@ const ListComponent = ({ koreaList, fetchDeleteKorea }) => {
                         <TableRow className={"korea-table-th"}>
                             <TableCell align="center">택배사</TableCell>
                             <TableCell align="center">송장번호</TableCell>
+                            <TableCell align="center">배송상태</TableCell>
                             <TableCell align="center"></TableCell>
                         </TableRow>
                     </TableHead>
@@ -21,6 +22,7 @@ const ListComponent = ({ koreaList, fetchDeleteKorea }) => {
                             >
                                 <TableCell align={"center"}>{korea.courierNm}</TableCell>
                                 <TableCell align={"center"}>{korea.invoice}</TableCell>
+                                <TableCell align={"center"}>{korea.kind}</TableCell>
                                 <TableCell align={"center"}>
                                     <Button variant={"contained"} color={"error"} onClick={() => fetchDeleteKorea(korea.id)}>삭제</Button>
                                 </TableCell>

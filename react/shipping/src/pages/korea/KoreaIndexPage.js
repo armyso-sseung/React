@@ -29,7 +29,7 @@ const KoreaIndexPage = () => {
 
     const fetchInsertKorea = async ( {courierCd, invoice} ) => {
         const koreaShippingList = await getKoreaList()
-        const shipping = koreaShippingList?.find(ele => ele.courierCd === courierCd)
+        const shipping = koreaShippingList?.find(ele => ele.invoice === invoice)
         if (shipping) return
 
         const courier = courierList?.find(ele => ele.Code === courierCd)
