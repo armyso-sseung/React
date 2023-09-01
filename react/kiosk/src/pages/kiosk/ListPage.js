@@ -2,7 +2,9 @@ import BaseLayout from "../../components/layout/BaseLayout";
 import ListComponent from "../../components/kiosk/ListComponent";
 import {deleteMovie, getMovieList} from "../../apis/KioskApi";
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
+import {Box} from "@mui/material";
+import KioskLayout from "../../components/layout/KioskLayout";
 
 
 const ListPage = () => {
@@ -31,9 +33,7 @@ const ListPage = () => {
     }
 
     return (
-        <BaseLayout>
-            <ListComponent movieList={movieList} fetchDeleteMovie={fetchDeleteMovie} goDetailPage={goDetailPage} />
-        </BaseLayout>
+        <ListComponent movieList={movieList} fetchDeleteMovie={fetchDeleteMovie} goDetailPage={goDetailPage} />
     )
 }
 

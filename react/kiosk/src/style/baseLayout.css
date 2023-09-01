@@ -1,0 +1,23 @@
+.BaseLayout a {
+    text-decoration: none;
+    color: #282c34;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+
+.detail-wrap {
+    height: 50vh;
+}
+
+.detail-img-wrap {
+    
+}
+
+.detail-wrap img {
+    height: 100%;
+}
+
+.detail-info-h3 {
+    height: 45vh;
+}

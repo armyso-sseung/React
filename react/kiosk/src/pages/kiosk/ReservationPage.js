@@ -5,6 +5,7 @@ import {getMovieList} from "../../apis/KioskApi";
 import Grid from "@mui/material/Unstable_Grid2";
 import ReservationPaymentComponent from "../../components/kiosk/ReservationPaymentComponent";
 import {Divider} from "@mui/material";
+import KioskLayout from "../../components/layout/KioskLayout";
 
 
 const ReservationPage = () => {
@@ -40,17 +41,15 @@ const ReservationPage = () => {
     }
 
     return (
-        <BaseLayout>
-            <Grid container>
-                <Grid xs={7.5} >
-                    <ReservationListComponent movieList={movieList} handleClickMovie={handleClickMovie} />
-                </Grid>
-                <Divider orientation="vertical" flexItem />
-                <Grid xs={4} >
-                    <ReservationPaymentComponent cartList={cartList} handleClickAmount={handleClickAmount} />
-                </Grid>
+        <Grid container justifyContent={"center"}>
+            <Grid xl={7.5} lg={7.5} md={7.5} xs={12} >
+                <ReservationListComponent movieList={movieList} handleClickMovie={handleClickMovie} />
             </Grid>
-        </BaseLayout>
+            <Divider orientation="vertical" flexItem />
+            <Grid xl={4} lg={4} md={4} xs={12} >
+                <ReservationPaymentComponent cartList={cartList} handleClickAmount={handleClickAmount} />
+            </Grid>
+        </Grid>
     )
 }
 

@@ -1,6 +1,7 @@
 import BaseLayout from "../../components/layout/BaseLayout";
 import IndexComponent from "../../components/kiosk/IndexComponent";
 import {useNavigate} from "react-router-dom";
+import KioskLayout from "../../components/layout/KioskLayout";
 
 
 const IndexPage = () => {
@@ -19,9 +20,7 @@ const IndexPage = () => {
     }
 
     return (
-        <BaseLayout>
-            <IndexComponent goListPage={goListPage} goRegisterPage={goRegisterPage} goReservationPage={goReservationPage} />
-        </BaseLayout>
+        <IndexComponent goListPage={goListPage} goRegisterPage={goRegisterPage} goReservationPage={goReservationPage} />
     )
 }
 

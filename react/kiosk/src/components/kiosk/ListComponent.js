@@ -8,7 +8,7 @@ const ListComponent = ({ movieList, fetchDeleteMovie, goDetailPage }) => {
         <Box className={"ListComponent"} padding={2}>
             <Grid container rowSpacing={2} columnSpacing={2}>
                 {movieList?.map(movie => (
-                    <Grid xs={3} key={movie.id}>
+                    <Grid xl={2} lg={2} md={6} sm={12} xs={12} key={movie.id}>
                         <Card xs={{ maxWidth: 400 }}>
                             <CardActionArea onClick={() => goDetailPage(movie.id)}>
                                 <CardMedia

@@ -1,5 +1,8 @@
-import {Box, Breadcrumbs, Container, Link, Typography} from "@mui/material";
+import {Box, Breadcrumbs, Container} from "@mui/material";
 import * as PropTypes from "prop-types";
+import {Link, Outlet} from "react-router-dom";
+import "../../style/baseLayout.css"
+
 
 function GrainIcon(props) {
     return null;
@@ -24,39 +27,16 @@ const BaseLayout = ({ children }) => {
             <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }}>
                 <Box className={"Nav"} margin={"0 20px"}>
                     <Breadcrumbs aria-label="breadcrumb">
-                        <Link
-                            underline="hover"
-                            sx={{ display: 'flex', alignItems: 'center' }}
-                            color="inherit"
-                            href="/"
-                        >
+                        <Link to={'/'} sx={{display: 'flex', alignItems: 'center'}}>
                             HOME
                         </Link>
-                        <Link
-                            underline="hover"
-                            sx={{ display: 'flex', alignItems: 'center' }}
-                            color="inherit"
-                            href="/kiosk"
-                        >
-                            <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+                        <Link to={'/kiosk/list'} sx={{display: 'flex', alignItems: 'center'}}>
                             List
                         </Link>
-                        <Link
-                            underline="hover"
-                            sx={{ display: 'flex', alignItems: 'center' }}
-                            color="inherit"
-                            href="/kiosk/register"
-                        >
-                            <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+                        <Link to={'/kiosk/register'} sx={{display: 'flex', alignItems: 'center'}}>
                             Register
                         </Link>
-                        <Link
-                            underline="hover"
-                            sx={{ display: 'flex', alignItems: 'center' }}
-                            color="inherit"
-                            href="/kiosk/reservation"
-                        >
-                            <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+                        <Link to={'/kiosk/reservation'} sx={{display: 'flex', alignItems: 'center'}}>
                             Reservation
                         </Link>
                     </Breadcrumbs>

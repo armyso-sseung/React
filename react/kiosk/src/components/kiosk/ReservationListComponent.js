@@ -8,7 +8,7 @@ const ReservationListComponent = ({ movieList, handleClickMovie }) => {
         <Box className={"ReservationListComponent"}>
             <Grid container rowSpacing={2} columnSpacing={2} padding={2}>
                 {movieList?.map(movie => (
-                    <Grid xs={3} key={movie.id}>
+                    <Grid xl={3} lg={3} md={6} xs={12} key={movie.id}>
                         <Card xs={{ maxWidth: 400 }} onClick={() => handleClickMovie(movie)}>
                             <CardActionArea>
                                 <CardMedia

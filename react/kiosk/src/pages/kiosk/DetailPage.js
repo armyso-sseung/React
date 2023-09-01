@@ -1,6 +1,5 @@
-import BaseLayout from "../../components/layout/BaseLayout";
 import {useParams} from "react-router-dom";
-import {getMovie, getMovieList} from "../../apis/KioskApi";
+import {getMovie} from "../../apis/KioskApi";
 import {useEffect, useState} from "react";
 import DetailComponent from "../../components/kiosk/DetailComponent";
 
@@ -19,9 +18,7 @@ const DetailPage = () => {
     }
 
     return (
-        <BaseLayout>
-            <DetailComponent movie={movie} />
-        </BaseLayout>
+        <DetailComponent movie={movie} />
     )
 }
 

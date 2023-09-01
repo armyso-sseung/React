@@ -2,6 +2,7 @@ import BaseLayout from "../../components/layout/BaseLayout";
 import RegisterComponent from "../../components/kiosk/RegisterComponent";
 import {useEffect, useState} from "react";
 import {getMovieList} from "../../apis/KioskApi";
+import KioskLayout from "../../components/layout/KioskLayout";
 
 
 const RegisterPage = () => {
@@ -17,9 +18,7 @@ const RegisterPage = () => {
     }
 
     return (
-        <BaseLayout>
-            <RegisterComponent movieList={movieList} />
-        </BaseLayout>
+        <RegisterComponent movieList={movieList} />
     )
 }
 
