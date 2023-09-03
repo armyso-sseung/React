@@ -1,24 +1,23 @@
-import BaseLayout from "../../components/layout/BaseLayout";
 import RegisterComponent from "../../components/kiosk/RegisterComponent";
-import {useEffect, useState} from "react";
-import {getMovieList} from "../../apis/KioskApi";
-import KioskLayout from "../../components/layout/KioskLayout";
+import {useCallback, useEffect, useState} from "react";
+import {getMovieList, insertMovie} from "../../apis/KioskApi";
 
 
 const RegisterPage = () => {
     const [ movieList, setMovieList ] = useState([])
 
+
     useEffect(() => {
-        fetchGetMovieList()
+        getMovieList().then(data => setMovieList(data))
     }, [])
 
-    const fetchGetMovieList = async () => {
-        const data = await getMovieList()
-        setMovieList(data)
-    }
+    const fetchInsertMovie = useCallback(movie => {
+        insertMovie(movie).then(result => console.log(`INSERT RESULT : ${result}`))
+    }, [])
+
 
     return (
-        <RegisterComponent movieList={movieList} />
+        <RegisterComponent movieList={movieList} fetchInsertMovie={fetchInsertMovie} />
     )
 }
 

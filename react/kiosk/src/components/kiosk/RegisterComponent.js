@@ -11,25 +11,20 @@ import {
     TextField
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import { DataGrid } from '@mui/x-data-grid';
-import React, {useState} from "react";
-import * as PropTypes from "prop-types";
-import {insertMovie} from "../../apis/KioskApi";
+import React, {useCallback, useState} from "react";
 
 
-DataGrid.propTypes = {
-    columns: PropTypes.any,
-    rows: PropTypes.any
-};
-const RegisterComponent = ({movieList}) => {
+const RegisterComponent = ({movieList, fetchInsertMovie}) => {
     const [ movie, setMovie ] = useState({
         title: "",
         price: "",
         path: ""
     })
 
+
     const handleChangeTitle = (e) => {
         setMovie({...movie, title: e.target.value})
+        console.log(movie)
     }
 
     const handleChangePrice = (e) => {
@@ -40,14 +35,15 @@ const RegisterComponent = ({movieList}) => {
         setMovie({...movie, path: e.target.value})
     }
 
-    const handleClick = async (e) => {
+    const handleClick = useCallback( (e) => {
         if (movie.title && movie.price) {
-            await insertMovie(movie)
+            fetchInsertMovie(movie)
             return
         }
 
         e.preventDefault()
-    }
+    }, [movie.title, movie.price, movie.path])
+
 
     return (
         <Box className={"RegisterComponent"}>
