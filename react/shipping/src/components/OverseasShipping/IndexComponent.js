@@ -1,13 +1,14 @@
 import {Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import SearchComponent from "../common/SearchComponent";
 import Grid from "@mui/material/Unstable_Grid2";
+import {useCallback} from "react";
 
 
 const IndexComponent = ({ shipping, handleSearch }) => {
-    const handleFindData = ( item, name ) => {
+    const handleFindData = useCallback(( item, name ) => {
         const ship = item?.find(ele => ele.name === name)
         return ship?.children[0]?.content
-    }
+    }, [])
 
 
     return (

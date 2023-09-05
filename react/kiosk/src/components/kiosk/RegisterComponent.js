@@ -24,7 +24,6 @@ const RegisterComponent = ({movieList, fetchInsertMovie}) => {
 
     const handleChangeTitle = (e) => {
         setMovie({...movie, title: e.target.value})
-        console.log(movie)
     }
 
     const handleChangePrice = (e) => {

@@ -9,17 +9,12 @@ const KoreaListPage = () => {
 
 
     useEffect(() => {
-        fetchGetKoreaList()
+        getKoreaList().then(data => setKoreaList(data))
     }, [])
 
-    const fetchGetKoreaList = async () => {
-        const data = await getKoreaList()
-        setKoreaList(data)
-    }
-
     const fetchDeleteKorea = async (id) => {
-        await deleteKorea(id)
-        fetchGetKoreaList()
+        await deleteKorea(id).then(`DEL SUCCESS`)
+        getKoreaList().then(data => setKoreaList(data))
     }
 
 

@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import SearchComponent from "../common/SearchComponent";
 import Grid from "@mui/material/Unstable_Grid2";
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import {getTracking} from "../../apis/koreaShippingApi";
 
 
@@ -20,11 +20,11 @@ const IndexComponent = ({ courierList, fetchGetTracking, tracking, fetchInsertKo
     const [ courier, setCourier ] = useState('')
 
 
-    const handleChange = (event) => {
+    const handleChange = useCallback(event => {
         setCourier(event.target.value)
-    }
+    }, [courier])
 
-    const handleSearch = (value) => {
+    const handleSearch = useCallback(value => {
         if (!courier) {
             alert("택배사를 선택해주시기 바랍니다.")
             return
@@ -37,11 +37,11 @@ const IndexComponent = ({ courierList, fetchGetTracking, tracking, fetchInsertKo
 
         fetchGetTracking(shipping)
         fetchInsertKorea(shipping)
-    }
+    }, [courier])
 
-    const findCourierName = (code) => {
+    const findCourierName = useCallback(code => {
         return courierList.find( ele => ele.Code === code )?.Name
-    }
+    }, [courierList])
 
 
     return (

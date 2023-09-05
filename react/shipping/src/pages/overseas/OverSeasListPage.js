@@ -9,17 +9,12 @@ const OverSeasListPage = () => {
     const [overseasList, setOverseasList] = useState([])
 
     useEffect(() => {
-        fetchGetOverseasList()
+        getOverseasList().then(data => setOverseasList(data))
     }, [])
 
-    const fetchGetOverseasList = async () => {
-        const data = await getOverseasList()
-        setOverseasList(data)
-    }
-
     const fetchDeleteOverseas = async (id) => {
-        await deleteOverseas(id)
-            .then(fetchGetOverseasList())
+        await deleteOverseas(id).then(`DEL SUCCESS`)
+        getOverseasList().then(data => setOverseasList(data))
     }
 
 

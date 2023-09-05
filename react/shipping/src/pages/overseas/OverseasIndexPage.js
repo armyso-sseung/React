@@ -1,6 +1,6 @@
 import IndexComponent from "../../components/OverseasShipping/IndexComponent";
 import OverseasLayout from "../../layouts/OverseasLayout";
-import {useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import {getOverseasShipping} from "../../apis/OverseasShippingApi";
 
 
@@ -10,18 +10,13 @@ const OverseasIndexPage = () => {
 
     useEffect(() => {
         if (value) {
-            fetchGetOverseasShipping()
+            getOverseasShipping(value).then(data => setShipping(data))
         }
     }, [value])
 
-    const fetchGetOverseasShipping = async () => {
-        const data = await getOverseasShipping(value)
-        setShipping(data)
-    }
-
-    const handleSearch = (value) => {
+    const handleSearch = useCallback(value => {
         setValue(value)
-    }
+    }, [value])
 
     return (
         <OverseasLayout>

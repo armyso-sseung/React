@@ -1,5 +1,5 @@
 import IndexComponent from "../../components/KoreaShipping/IndexComponent";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {getCourierList, getKoreaList, getTracking, insertKorea} from "../../apis/koreaShippingApi";
 import KoreaLayout from "../../layouts/KoreaLayout";
 
@@ -10,37 +10,33 @@ const KoreaIndexPage = () => {
 
 
     useEffect(() => {
-        fetchGetCourierList()
+        getCourierList().then(data => setCourierList(data))
     }, [])
 
-    const fetchGetCourierList = async () => {
-        const data = await getCourierList()
-        setCourierList(data)
-    }
+    const fetchGetTracking = useCallback((shipping) => {
+        getTracking(shipping).then(data => {
+            if (!data.invoiceNo) {
+                alert(data.msg)
+                return
+            }
+            setTracking(data)
+        })
+    }, [])
 
-    const fetchGetTracking = async (shipping) => {
-        const data = await getTracking(shipping)
-        if (!data.invoiceNo) {
-            alert(data.msg)
-            return
-        }
-        setTracking(data)
-    }
-
-    const fetchInsertKorea = async ( {courierCd, invoice} ) => {
+    const fetchInsertKorea = useCallback( async ({courierCd, invoice}) => {
         const koreaShippingList = await getKoreaList()
         const shipping = koreaShippingList?.find(ele => ele.invoice === invoice)
         if (shipping) return
 
-        const courier = courierList?.find(ele => ele.Code === courierCd)
+        const courier = courierList?.find(ele => ele?.Code === courierCd)
         const koreaInfo = {
-            courierCd: courier.Code,
-            courierNm: courier.Name,
+            courierCd: courier?.Code,
+            courierNm: courier?.Name,
             invoice
         }
 
         await insertKorea(koreaInfo)
-    }
+    }, [])
 
 
     return (

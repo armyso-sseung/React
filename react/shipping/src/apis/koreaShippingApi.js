@@ -18,6 +18,8 @@ export const getCourierList = async () => {
 }
 
 export const getTracking = async ({ courierCd, invoice }) => {
+    if (!courierCd || !invoice ) return
+
     return await axios.get(`${SWEETTRACKER_URL}/trackingInfo`,
         {
             params: {
@@ -36,7 +38,7 @@ export const getKoreaList = async () => {
         .then(r => {
             return Promise.all(r.data.map(async (korea) => {
                 const shipping = await getTracking(korea)
-                return shipping.status || shipping.invoiceNo ? {...korea, kind: shipping.trackingDetails[shipping.trackingDetails.length - 1].kind} : {...korea, kind: '확인불가'}
+                return shipping?.status || shipping?.invoiceNo ? {...korea, kind: shipping.trackingDetails[shipping.trackingDetails.length - 1].kind} : {...korea, kind: '확인불가'}
             }))
         })
 }
