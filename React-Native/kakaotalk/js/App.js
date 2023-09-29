@@ -26,18 +26,19 @@ export default function App() {
 
     const ItemSeparatorComponent = () => <Margin height={13} />
 
-    const renderItem = ({ friend }) => (
+    const renderItem = ({ item }) => (
         <View>
             <Profile
-                uri={ friend.uri }
-                name={ friend.name }
-                introduction={ friend.introduction }
+                uri={ item.uri }
+                name={ item.name }
+                introduction={ item.introduction }
+                isMe={false}
             />
         </View>
     )
 
     const ListHeaderComponent = () => (
-        <View>
+        <View style={styles.body}>
             <Header />
 
             <Margin height={10} />
@@ -46,6 +47,7 @@ export default function App() {
                 uri={myProfile.uri}
                 name={myProfile.name}
                 introduction={myProfile.introduction}
+                isMe={false}
             />
 
             <Margin height={15} />
@@ -57,18 +59,26 @@ export default function App() {
                 onPress={onPressArrow}
                 isOpened={isOpened}
             />
+
+            <Margin height={5} />
         </View>
     )
+
+    const ListFooterComponent = () => <Margin height={10} />
 
 
     return (
         <View style={styles.container}>
             <FlatList
-                data={friendProfiles}
+                data={ isOpened ? friendProfiles : [] }
+                contentContainerStyle={{ paddingHorizontal: 15 }}
                 keyExtractor={(_, idx) => idx}
+                stickyHeaderIndices={[0]}
                 ItemSeparatorComponent={ItemSeparatorComponent}
                 renderItem={renderItem}
                 ListHeaderComponent={ListHeaderComponent}
+                ListFooterComponent={ListFooterComponent}
+                showsVerticalScrollIndicator={false}
             />
             <TabBar
                 selectedTabIdx={selectedTabIdx}
@@ -129,4 +139,8 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 15,
     },
+
+    body: {
+        backgroundColor: "white",
+    }
 });

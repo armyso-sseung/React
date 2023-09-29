@@ -1,18 +1,20 @@
-import {View, Text, SafeAreaView, StyleSheet} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { Ionicons } from '@expo/vector-icons';
+import { Header } from "../types/BaseType";
 
-const IconButton = ({ name }) => {
+
+const IconButton = ({ name } :Header) => {
     return (
-        <View style={styles.icon}>
+        <TouchableOpacity hitSlop={{ top: 15, bottom: 15 }} style={styles.icon}>
             <Ionicons name={ name } size={24} color="black" />
-        </View>
+        </TouchableOpacity>
     )
 }
 
 
-export default  () => {
+export default () => {
     return (
-        <View style={styles.headerContainer}>
+        <View style={styles.headerWrap}>
             <Text style={styles.title}>친구</Text>
             <View style={styles.iconWrap}>
                 <IconButton name={"search-outline"} />
@@ -26,7 +28,7 @@ export default  () => {
 
 
 const styles = StyleSheet.create({
-    headerContainer: {
+    headerWrap: {
         flexDirection: "row",
         justifyContent: "space-between",
         paddingVertical: 10,
@@ -34,14 +36,14 @@ const styles = StyleSheet.create({
 
     title: {
         fontSize: 22,
-        fontWeight: "bold",
+        fontWeight: 'bold'
     },
 
     iconWrap: {
-        flexDirection: "row",
+        flexDirection: 'row',
     },
 
     icon: {
         paddingHorizontal: 6,
-    },
+    }
 })
