@@ -80,29 +80,35 @@ export default () => {
         }
 
         let finalResult :number = result
-        switch (currentOperator) {
+        const finalInput :number = isClickedEqual ? tempInput : input
+        const finalOperator :string = isClickedEqual ? tempOperator : currentOperator
+        switch (finalOperator) {
             case "/" :
-                finalResult = result / input
+                finalResult = result / finalInput
                 break
 
             case "*" :
-                finalResult = result * input
+                finalResult = result * finalInput
                 break
 
             case "-" :
-                finalResult = result - input
+                finalResult = result - finalInput
                 break
 
             case "+" :
-                finalResult = result + input
+                finalResult = result + finalInput
                 break
 
             default :
                 break
         }
 
+        setResult(finalResult)
         setInput(finalResult)
+        setTempInput(finalInput)
         setCurrentOperator(null)
+        setTempOperator(finalOperator)
+        setIsClickedEqual(true)
     }
 
     const handleClickReset = () => {
