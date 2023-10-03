@@ -3,14 +3,16 @@ import {SimpleLineIcons} from "@expo/vector-icons";
 import dayjs from "dayjs";
 
 import {getDayColor, getDayText, statusBarHeight} from "../util/commonUtil";
+import {CalendarArrowType, CalendarType, ColumnType, TodoListType} from "../type/baseType";
 
 
-const Column = ({ text, color, opacity, onPress, isSelected, disabled } :ColumnType) => {
+const Column = ({ text, color, opacity, onPress, isSelected, disabled, hasTodo } :ColumnType) => {
     return (
         <TouchableOpacity disabled={ disabled } onPress={ onPress } style={[ styles.columnWrap, isSelected && styles.columnSelected ]}>
             <Text style={{
                 color,
-                opacity
+                opacity,
+                fontWeight: hasTodo ? "bold" : "normal"
             }}
             >{ text }</Text>
         </TouchableOpacity>
@@ -18,7 +20,7 @@ const Column = ({ text, color, opacity, onPress, isSelected, disabled } :ColumnT
 }
 
 
-export default ({ columns, selectedDate, handleClickDate, handleClickArrow, handleShowDate } :CalendarType) => {
+export default ({ columns, selectedDate, handleClickDate, handleClickArrow, handleShowDate, todoList } :CalendarType) => {
     const ArrowButton = ({ iconName, type } :CalendarArrowType) => {
         return (
             <TouchableOpacity onPress={ () => handleClickArrow( type ) } style={styles.dateArrow} >
@@ -28,12 +30,14 @@ export default ({ columns, selectedDate, handleClickDate, handleClickArrow, hand
     }
 
 
-    const renderItem = ({ item: date} :{}) => {
+    const renderItem = ({ item: date} :any) => {
         const dateText :number = dayjs(date).get("date")
         const day :number = dayjs(date).get("day")
 
         const isCurrentMonth :boolean = dayjs(date).isSame(selectedDate, "month")
         const isSelected :boolean = dayjs(date).isSame(selectedDate, "date")
+
+        const hasTodo :boolean = !!todoList.find(( todo ) => dayjs(date).isSame(todo.date, "date"))
 
 
         return (
@@ -42,7 +46,9 @@ export default ({ columns, selectedDate, handleClickDate, handleClickArrow, hand
                 color={ getDayColor(day) }
                 opacity={ isCurrentMonth ? 1 : 0.4 }
                 isSelected={ isSelected }
+                disabled={ false }
                 onPress={ () => handleClickDate( date ) }
+                hasTodo={ hasTodo }
             />
         )
     }
@@ -71,7 +77,11 @@ export default ({ columns, selectedDate, handleClickDate, handleClickArrow, hand
                                 text={ getDayText(day) }
                                 color={ getDayColor(day) }
                                 opacity={ 1 }
+                                isSelected={ false }
                                 disabled={ true }
+                                onPress={ () => {} }
+                                hasTodo={ false }
+
                             />
                         )
                     })}

@@ -7,20 +7,20 @@ export const useCalendar = () => {
     const [isDatePickerVisible, setDatePickerVisivility] = useState<boolean>(false)
 
 
-    const showDatePicker = () => {
+    const showDatePicker = () :void => {
         setDatePickerVisivility(true)
     }
 
-    const hideDatePicker = () => {
+    const hideDatePicker = () :void => {
         setDatePickerVisivility(false)
     }
 
-    const handleConfirm = ( date ) => {
+    const handleConfirm = ( date :any ) :void => {
         setSelectedDate(dayjs(date))
         hideDatePicker()
     }
 
-    const handleClickArrow = ( type :number ) => {
+    const handleClickArrow = ( type :number ) :void => {
          switch ( type ) {
              case 1:
                  arrowLeft()
@@ -33,13 +33,13 @@ export const useCalendar = () => {
          }
     }
 
-    const arrowLeft = () => {
-        const newSelectedDate = dayjs(selectedDate).subtract(1, "month")
+    const arrowLeft = () :void => {
+        const newSelectedDate :dayjs.Dayjs = dayjs(selectedDate).subtract(1, "month")
         setSelectedDate(newSelectedDate)
     }
 
-    const arrowRight = () => {
-        const newSelectedDate = dayjs(selectedDate).add(1, "month")
+    const arrowRight = () :void => {
+        const newSelectedDate :dayjs.Dayjs = dayjs(selectedDate).add(1, "month")
         setSelectedDate(newSelectedDate)
     }
 
