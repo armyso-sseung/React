@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import AsyncStorageNative from "@react-native-async-storage/async-storage/src/AsyncStorage.native";
 
 
-const TODO_LIST_KET = "TODO_LIST_KET"
+
 
 
 const defaultTodoList = [
