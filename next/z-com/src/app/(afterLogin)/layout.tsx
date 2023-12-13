@@ -51,7 +51,12 @@ export default function AfterLoginLayout({ children } :{ children :ReactNode }) 
                             </form>
                         </div>
                         <TrandSection />
-                        <FollowRecommend />
+                        <div className={style.followRecommend}>
+                            <h3>팔로우 추천</h3>
+                            <FollowRecommend />
+                            <FollowRecommend />
+                            <FollowRecommend />
+                        </div>
                     </section>
                 </div>
             </div>
