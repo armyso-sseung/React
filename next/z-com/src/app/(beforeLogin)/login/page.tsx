@@ -1,10 +1,6 @@
 "use client"
 
 import {useRouter} from "next/navigation";
-import styles from "@/app/(beforeLogin)/_component/main.module.css";
-import Image from "next/image";
-import zLogo from "../../../../public/zlogo.png";
-import Link from "next/link";
 import Main from "@/app/(beforeLogin)/_component/Main";
 
 export default function Login() {
@@ -24,9 +20,9 @@ export default function Login() {
 
 
 // router.push
-// localhost:3000/ogin -> localhost:3000/i/flow/login
+// localhost:3000/login -> localhost:3000/i/flow/login
 // 뒤로가기 하면 바로 뒤로 감
 
 // router.replace
-// localhost:3000/ogin -> localhost:3000/i/flow/login
+// localhost:3000/login -> localhost:3000/i/flow/login
 // 뒤로가기 하면 바로 뒤가 아닌 메인으로 간다

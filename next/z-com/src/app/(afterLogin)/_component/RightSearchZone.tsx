@@ -2,13 +2,14 @@
 
 
 import style from "./rightSearchZone.module.css";
-import {usePathname} from "next/navigation";
-import {ChangeEventHandler} from "react";
+import {usePathname, useSearchParams} from "next/navigation";
+import {ChangeEventHandler, useState} from "react";
 import SearchForm from "@/app/(afterLogin)/_component/SearchForm";
 
 
 export default function RightSearchZone() {
     const pathName = usePathname()
+    const searchParams = useSearchParams()
 
 
     const onChangeAll :ChangeEventHandler<HTMLInputElement> = () => {
@@ -47,7 +48,7 @@ export default function RightSearchZone() {
 
     return (
         <div style={{ marginBottom: 60, width: 'inherit' }}>
-            <SearchForm />
+            <SearchForm q={searchParams.get('q') || ''} />
         </div>
     )
 }
