@@ -36,3 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 next/inflearn-supabase/todo-list/.env
+
+next/inflearn-supabase/todo-list/package-lock.json
+
+next/inflearn-supabase/todo-list/yarn.lock
