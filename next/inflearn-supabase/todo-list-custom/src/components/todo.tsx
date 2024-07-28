@@ -1,6 +1,11 @@
-import { Button, Checkbox } from "antd";
+import { Button, Checkbox, Spin } from "antd";
 import { useState } from "react";
-import { CheckOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import {
+  CheckOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 import { useMutation } from "@tanstack/react-query";
 import { deleteTodo, updateTodo } from "../actions/todo-actions";
 import { queryClient } from "../config/ReactQueryClientProvider";
@@ -61,7 +66,11 @@ const Todo = ({ todo }) => {
           type="primary"
           onClick={async () => await updateTodoMutation.mutate()}
         >
-          <CheckOutlined />
+          {updateTodoMutation.isPending ? (
+            <Spin indicator={<LoadingOutlined spin />} />
+          ) : (
+            <CheckOutlined />
+          )}
         </Button>
       ) : (
         <Button onClick={() => setIsEditing(true)}>
@@ -70,7 +79,11 @@ const Todo = ({ todo }) => {
       )}
 
       <Button type="primary" danger onClick={() => deleteTodoMutation.mutate()}>
-        <DeleteOutlined />
+        {deleteTodoMutation.isPending ? (
+          <Spin indicator={<LoadingOutlined spin />} />
+        ) : (
+          <DeleteOutlined />
+        )}
       </Button>
     </div>
   );
