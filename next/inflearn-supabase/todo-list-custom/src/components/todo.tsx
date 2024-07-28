@@ -42,6 +42,7 @@ const Todo = ({ todo }) => {
   return (
     <div className="w-full flex items-center py-1.5 gap-1">
       <Checkbox
+        className="!mx-2"
         value={completed}
         checked={completed}
         onChange={async (e) => {
