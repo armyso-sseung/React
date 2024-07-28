@@ -1,28 +1,31 @@
-"use client";
-
-import { Checkbox, IconButton, Spinner } from "@material-tailwind/react";
+import { Button, Checkbox, Spin } from "antd";
 import { useState } from "react";
+import {
+  CheckOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 import { useMutation } from "@tanstack/react-query";
 import { deleteTodo, updateTodo } from "../actions/todo-actions";
 import { queryClient } from "../config/ReactQueryClientProvider";
 
 const Todo = ({ todo }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [completed, setCompleted] = useState<boolean>(todo.completed);
   const [title, setTitle] = useState(todo.title);
+  const [completed, setCompleted] = useState<boolean>(todo.completed);
+  const [isEditing, setIsEditing] = useState(false);
 
   const updateTodoMutation = useMutation({
     mutationFn: () =>
       updateTodo({
         id: todo.id,
-        title,
         completed,
+        title,
       }),
-
     onSuccess: () => {
       setIsEditing(false);
       queryClient.invalidateQueries({
-        queryKey: ["todos"],
+        queryKey: ["todo"],
       });
     },
   });
@@ -31,14 +34,15 @@ const Todo = ({ todo }) => {
     mutationFn: () => deleteTodo(todo.id),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["todos"],
+        queryKey: ["todo"],
       });
     },
   });
 
   return (
-    <div className="w-full flex items-center gap-1">
+    <div className="w-full flex items-center py-1.5 gap-1">
       <Checkbox
+        value={completed}
         checked={completed}
         onChange={async (e) => {
           await setCompleted(e.target.checked);
@@ -49,7 +53,7 @@ const Todo = ({ todo }) => {
       {isEditing ? (
         <input
           type="text"
-          className="flex-1 border-b-black border-b pb-1"
+          className="border-b-black border-b flex-1"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
@@ -58,26 +62,29 @@ const Todo = ({ todo }) => {
       )}
 
       {isEditing ? (
-        <IconButton
-          onClick={async () => {
-            await updateTodoMutation.mutate();
-          }}
+        <Button
+          type="primary"
+          onClick={async () => await updateTodoMutation.mutate()}
         >
-          <i className="fas fa-check" />
-        </IconButton>
+          {updateTodoMutation.isPending ? (
+            <Spin indicator={<LoadingOutlined spin />} />
+          ) : (
+            <CheckOutlined />
+          )}
+        </Button>
       ) : (
-        <IconButton onClick={() => setIsEditing(true)}>
-          <i className="fas fa-pen" />
-        </IconButton>
+        <Button onClick={() => setIsEditing(true)}>
+          <EditOutlined />
+        </Button>
       )}
 
-      <IconButton onClick={() => deleteTodoMutation.mutate()}>
+      <Button type="primary" danger onClick={() => deleteTodoMutation.mutate()}>
         {deleteTodoMutation.isPending ? (
-          <Spinner />
+          <Spin indicator={<LoadingOutlined spin />} />
         ) : (
-          <i className="fas fa-trash"></i>
+          <DeleteOutlined />
         )}
-      </IconButton>
+      </Button>
     </div>
   );
 };
