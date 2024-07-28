@@ -61,7 +61,7 @@ export const applyMiddlewareSupabaseClient = async (request: NextRequest) => {
   return response;
 };
 
-export const middleware = async (request) =>
+export const middleware = async (request: NextRequest) =>
   await applyMiddlewareSupabaseClient(request);
 
 export const config = {
